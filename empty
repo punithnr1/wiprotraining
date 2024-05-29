@@ -1,1 +1,92 @@
-https://docs.google.com/document/d/1KwMnRE6GGtO-dcyLb6tcQfWj04cIAOZ2mRszl0BW9oc/edit?usp=sharing_eip_m&ts=6656ca4b
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+		<h2>Login Form</h2>
+		<form action="" method="get">
+			Enter Userid: <input   type="text" name="userid" size="20" />
+			Enter Password: <input type="text" name="password"  size="20"/>
+			<input type="submit"  value="Login"/>
+		</form>
+</body>
+</html>
+
+
+—-------------------------------------
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+		<h2>Login Form</h2>
+		<form action="login" method="post">
+			Enter Userid: <input   type="text" name="userid" size="20" /> <br>
+			Enter Password: <input type="password" name="password"  size="20"/><br>
+			<input type="submit"  value="Login"/>
+		</form>
+</body>
+</html>
+
+
+—-------------------
+
+
+package com.wipro.controller;
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+/*
+* If Http method is GET, the form data is appended to the url and sent to the server in the foll. format:
+*
+* 				url?querystring
+*
+*		query string format:
+*				name=value&name=value
+*
+*	Ex.
+*		http://localhost:8081/dynamic-web-app-demo/login?userid=Srini&password=Srini%40123
+*
+*		While sending sensitive data or large amount of data to the server, apply HttP POST/PUT methods
+*/
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+     
+  
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			PrintWriter out = response.getWriter();
+			String userid = request.getParameter("userid");
+			String password =  request.getParameter("password");
+			
+			System.out.println(userid+","+password);
+			
+			out.println("<html><body><h2>Your Credentials:"+ userid+","+password+"</h2></body></html>");
+			
+		
+		}catch(Exception e) {
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,e.getMessage());
+		}
+		
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+	}
+}
+
+
