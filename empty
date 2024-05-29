@@ -1,1 +1,42 @@
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+/*
+* http://localhost:8081/dynamic-web-app-demo/hello
+*
+* Since default HTTP method is GET, control enters into gdoGet() method
+*
+*    HttpServlet -> GenericServlet -----> Servlet
+*   
+*    Servlet is an interface, GenericServlet is a class that implements Servlet,
+*    HttpServlet is class that extends GenericServlet.
+*   
+*   
+*    GenericServlet can handle any type of protocol( Http, ftp, SMTP etc) whereas HttpServlet
+*    can handle only Http protocol. Since most of the web applications are http-base, we create our own
+*    servlet that extend HttpServlet.
+*   
+*/
+@WebServlet("/hello")
+public class HelloWorldServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PrintWriter out = response.getWriter();
+		//dynamically generate the web page, writes into response object
+		out.println("<html><body><h1><font color='red'> Welcome to My Dynamic Page</font></h1></body></html>");
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+	}
+}
+
+
