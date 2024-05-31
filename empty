@@ -1,21 +1,2 @@
 
-public static void main(String[] args) {
-		ApplicationContext context=null;
-		try {
-			//IoC container 			
-			context= new ClassPathXmlApplicationContext("spring.xml");
-			
-
-
-			
-			
-			 //shutdown IoC 
-			((AbstractApplicationContext)context).registerShutdownHook();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			((AbstractApplicationContext)context).close();
-		}
-
-
-	}
+https://drive.google.com/drive/folders/1mt2nT425S66ZJYC1R3-RnoUIGsbpLwHy?usp=sharing_eip_se_dm&ts=6656cb02
